@@ -1,11 +1,13 @@
 package com.FoldersAndFIles.models;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "folders")
 public class Folder {
 
     @Id
@@ -15,12 +17,18 @@ public class Folder {
     @Column(unique = true)
     private String title;
 
-    @Column(name = "files")
+    @JsonIgnoreProperties({"folders"})
+    @OneToMany(mappedBy = "folder")
     private List<File> files;
 
-    public Folder(String title, List<File> files) {
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public Folder(String title, User user) {
         this.title = title;
-        this.files = files;
+        this.files = new ArrayList<File>();
+        this.user = user;
     }
 
     public Folder() {
@@ -48,5 +56,13 @@ public class Folder {
 
     public void setFiles(List<File> files) {
         this.files = files;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

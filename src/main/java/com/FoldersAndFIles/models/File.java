@@ -1,6 +1,9 @@
 package com.FoldersAndFIles.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "files")
@@ -19,7 +22,8 @@ public class File {
     @Column(name = "size")
     private int size;
 
-    @Column(name = "folder")
+    @ManyToOne
+    @JoinColumn(name = "folder_id", nullable = false)
     private Folder folder;
 
     public File(String name, String extension, int size, Folder folder) {
