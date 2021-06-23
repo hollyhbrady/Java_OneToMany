@@ -17,13 +17,13 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    @JsonIgnoreProperties({"users"})
+    @JsonIgnoreProperties({"user"})
     @OneToMany(mappedBy = "user")
     private List<Folder> folders;
 
     public User(String name) {
         this.name = name;
-        this.folders = new ArrayList<Folder>();
+        this.folders = new ArrayList<>();
     }
 
     public User() {

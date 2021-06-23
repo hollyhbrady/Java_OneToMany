@@ -1,7 +1,6 @@
 package com.FoldersAndFIles.controllers;
 
 import com.FoldersAndFIles.models.File;
-import com.FoldersAndFIles.models.Folder;
 import com.FoldersAndFIles.repositories.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +27,7 @@ public class FileController {
 
     @PostMapping(value = "/files")
     public ResponseEntity<File> postFile(@RequestBody File file){
-        return new ResponseEntity<>(fileRepository.save(file), HttpStatus.CREATED);
+        fileRepository.save(file);
+        return new ResponseEntity<>(file, HttpStatus.CREATED);
     }
 }

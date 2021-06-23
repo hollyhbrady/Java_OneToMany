@@ -17,17 +17,18 @@ public class Folder {
     @Column(unique = true)
     private String title;
 
-    @JsonIgnoreProperties({"folders"})
+    @JsonIgnoreProperties({"folder"})
     @OneToMany(mappedBy = "folder")
     private List<File> files;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"folders"})
     private User user;
 
     public Folder(String title, User user) {
         this.title = title;
-        this.files = new ArrayList<File>();
+        this.files = new ArrayList<>();
         this.user = user;
     }
 

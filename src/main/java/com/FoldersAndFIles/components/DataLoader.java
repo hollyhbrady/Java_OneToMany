@@ -27,7 +27,8 @@ public class DataLoader implements ApplicationRunner {
 
     }
 
-    public void run(ApplicationArguments args) {
+    @Override
+    public void run(ApplicationArguments args) throws Exception{
         User Seb = new User("Seb");
         userRepository.save(Seb);
 

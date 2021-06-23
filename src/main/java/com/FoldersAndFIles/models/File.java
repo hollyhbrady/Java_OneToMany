@@ -13,7 +13,7 @@ public class File {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(name = "name")
     private String name;
 
     @Column(nullable = false)
@@ -23,7 +23,8 @@ public class File {
     private int size;
 
     @ManyToOne
-    @JoinColumn(name = "folder_id", nullable = false)
+    @JoinColumn(name = "folder_id")
+    @JsonIgnoreProperties({"files"})
     private Folder folder;
 
     public File(String name, String extension, int size, Folder folder) {
